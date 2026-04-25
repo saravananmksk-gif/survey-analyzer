@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Analyzer</title>
+</head>
+<body>
+    <h2>Smart Survey Analyzer</h2>
+
+    <form method="POST">
+        <textarea name="responses" rows="10" cols="50" placeholder="Enter each response on a new line"></textarea><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+        <h3>Results:</h3>
+        <p>Positive: {{ result.positive }} ({{ result.positive_pct }}%)</p>
+        <p>Negative: {{ result.negative }} ({{ result.negative_pct }}%)</p>
+        <p>Neutral: {{ result.neutral }} ({{ result.neutral_pct }}%)</p>
+    {% endif %}
+</body>
+</html>

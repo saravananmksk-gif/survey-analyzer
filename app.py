@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request
 from textblob import TextBlob
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     result = None
+    graph_url = None
 
     if request.method == 'POST':
         text = request.form['responses']
@@ -35,7 +39,21 @@ def home():
             "neutral_pct": round((neutral/total)*100,2)
         }
 
-    return render_template('index.html', result=result)
+        # 📊 Create graph
+        labels = ['Positive', 'Negative', 'Neutral']
+        values = [positive, negative, neutral]
+
+        plt.figure()
+        plt.bar(labels, values)
+
+        # Save image to memory
+        img = io.BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+
+        graph_url = base64.b64encode(img.getvalue()).decode()
+
+    return render_template('index.html', result=result, graph_url=graph_url)
 
 if __name__ == "__main__":
     app.run(debug=True)

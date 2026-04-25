@@ -1,30 +1,40 @@
 # Smart Survey Analyzer
 
-A simple Python project that analyzes survey responses using sentiment analysis.
+A web-based Python application that analyzes survey responses using sentiment analysis.
 
 ## Features
-- Classifies responses as positive or negative
+- Web interface built using Flask
+- Classifies responses as positive, negative, or neutral
+- Displays percentage of each sentiment
 - Uses NLP (TextBlob)
 
 ## Objective
-
 To automate the analysis of survey responses using Natural Language Processing (NLP) techniques.
+
+## Tech Stack
+- Python
+- Flask
+- TextBlob
+
 ## How to Run
 
 1. Install dependencies:
-pip install textblob matplotlib
+pip install textblob flask
 
-2. Run the program:
+2. Run the application:
 python app.py
+
+3. Open in browser:
+http://127.0.0.1:5000
 
 ## Example
 
 ### Input
-Enter number of responses: 3  
 Good service  
 Very bad experience  
-Amazing support  
+Average support  
 
 ### Output
-Positive responses: 2  
-Negative responses: 1  
+Positive: 1 (33.33%)  
+Negative: 1 (33.33%)  
+Neutral: 1 (33.33%)  

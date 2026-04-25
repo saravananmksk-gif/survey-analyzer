@@ -7,5 +7,9 @@ A simple Python project that analyzes survey responses using sentiment analysis.
 - Uses NLP (TextBlob)
 
 ## How to Run
+
+1. Install dependencies:
 pip install textblob
+
+2. Run the program:
 python app.py

@@ -6,6 +6,9 @@ A simple Python project that analyzes survey responses using sentiment analysis.
 - Classifies responses as positive or negative
 - Uses NLP (TextBlob)
 
+## Objective
+
+To automate the analysis of survey responses using Natural Language Processing (NLP) techniques.
 ## How to Run
 
 1. Install dependencies:

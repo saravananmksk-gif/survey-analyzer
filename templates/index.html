@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Survey Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h2>Smart Survey Analyzer</h2>
@@ -11,11 +12,13 @@
         <button type="submit">Analyze</button>
     </form>
 
-    {% if result %}
-        <h3>Results:</h3>
-        <p>Positive: {{ result.positive }} ({{ result.positive_pct }}%)</p>
-        <p>Negative: {{ result.negative }} ({{ result.negative_pct }}%)</p>
-        <p>Neutral: {{ result.neutral }} ({{ result.neutral_pct }}%)</p>
+   {% if result %}
+        <div class="result-box">
+            <h3>Results:</h3>
+            <p>Positive: {{ result.positive }} ({{ result.positive_pct }}%)</p>
+            <p>Negative: {{ result.negative }} ({{ result.negative_pct }}%)</p>
+            <p>Neutral: {{ result.neutral }} ({{ result.neutral_pct }}%)</p>
+        </div>
     {% endif %}
 </body>
 </html>

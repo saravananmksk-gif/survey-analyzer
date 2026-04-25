@@ -1,44 +1,41 @@
+from flask import Flask, render_template, request
 from textblob import TextBlob
-import matplotlib.pyplot as plt
 
-print("Welcome to Smart Survey Analyzer\n")
+app = Flask(__name__)
 
-responses = []
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    result = None
 
-n = int(input("Enter number of responses: "))
+    if request.method == 'POST':
+        text = request.form['responses']
+        responses = text.split('\n')
 
-for i in range(n):
-    text = input(f"Response {i+1}: ")
-    responses.append(text)
+        positive = 0
+        negative = 0
+        neutral = 0
 
-positive = 0
-negative = 0
-neutral = 0
+        for r in responses:
+            polarity = TextBlob(r).sentiment.polarity
+            if polarity > 0:
+                positive += 1
+            elif polarity < 0:
+                negative += 1
+            else:
+                neutral += 1
 
-for r in responses:
-    analysis = TextBlob(r)
-    polarity = analysis.sentiment.polarity
+        total = len(responses)
 
-    if polarity > 0:
-        positive += 1
-    elif polarity < 0:
-        negative += 1
-    else:
-        neutral += 1
+        result = {
+            "positive": positive,
+            "negative": negative,
+            "neutral": neutral,
+            "positive_pct": round((positive/total)*100,2),
+            "negative_pct": round((negative/total)*100,2),
+            "neutral_pct": round((neutral/total)*100,2)
+        }
 
-total = len(responses)
+    return render_template('index.html', result=result)
 
-print("\n--- Analysis Result ---")
-print(f"Positive: {positive} ({(positive/total)*100:.2f}%)")
-print(f"Negative: {negative} ({(negative/total)*100:.2f}%)")
-print(f"Neutral: {neutral} ({(neutral/total)*100:.2f}%)")
-
-# Bar chart
-labels = ['Positive', 'Negative', 'Neutral']
-values = [positive, negative, neutral]
-
-plt.bar(labels, values)
-plt.title("Survey Sentiment Analysis")
-plt.xlabel("Sentiment")
-plt.ylabel("Number of Responses")
-plt.show()
+if __name__ == "__main__":
+    app.run(debug=True)

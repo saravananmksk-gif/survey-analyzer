@@ -13,3 +13,15 @@ pip install textblob
 
 2. Run the program:
 python app.py
+
+## Example
+
+### Input
+Enter number of responses: 3  
+Good service  
+Very bad experience  
+Amazing support  
+
+### Output
+Positive responses: 2  
+Negative responses: 1  

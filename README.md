@@ -12,7 +12,7 @@ To automate the analysis of survey responses using Natural Language Processing (
 ## How to Run
 
 1. Install dependencies:
-pip install textblob
+pip install textblob matplotlib
 
 2. Run the program:
 python app.py
